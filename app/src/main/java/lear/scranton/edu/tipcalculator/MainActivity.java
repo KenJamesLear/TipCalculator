@@ -11,16 +11,65 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Button;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Button;
+import android.app.Activity;
+import android.content.Intent;
+import android.widget.Toast;
+import java.text.DecimalFormat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private double percent;
+
+    private double total;
+    public static final String MY_TOTAL = "lear.scranton.edu.tipcalculator.my_total";
+    public static final int REQUEST_CODE = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Button one = (Button) findViewById(R.id.one_button);
+        one.setOnClickListener(this); // calling onClick() method
+        Button two = (Button) findViewById(R.id.two_button);
+        two.setOnClickListener(this);
+        Button three = (Button) findViewById(R.id.three_button);
+        three.setOnClickListener(this);
+        Button four = (Button) findViewById(R.id.four_button);
+        four.setOnClickListener(this); // calling onClick() method
+        Button five = (Button) findViewById(R.id.five_button);
+        five.setOnClickListener(this); // calling onClick() method
+        Button six = (Button) findViewById(R.id.six_button);
+        six.setOnClickListener(this); // calling onClick() method
+        Button seven = (Button) findViewById(R.id.seven_button);
+        seven.setOnClickListener(this); // calling onClick() method
+        Button eight = (Button) findViewById(R.id.eight_button);
+        eight.setOnClickListener(this); // calling onClick() method
+        Button nine = (Button) findViewById(R.id.nine_button);
+        nine.setOnClickListener(this); // calling onClick() method
+        Button back = (Button) findViewById(R.id.back_button);
+        back.setOnClickListener(this); // calling onClick() method
+        Button zero = (Button) findViewById(R.id.zero_button);
+        zero.setOnClickListener(this); // calling onClick() method
+        Button next = (Button) findViewById(R.id.next_button);
+        next.setOnClickListener(this); // calling onClick() method
+
+        total = 0;
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -53,60 +102,77 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public void onClick(View v) {
+        // default method for handling onClick Events..
+        switch (v.getId()) {
 
-    public void onRadioButtonClicked(View button){
-        boolean checked = ((RadioButton) button).isChecked();
-        switch(button.getId()) {
-            case R.id.radio_ten:
-                if (checked)
-                    percent = .1;
-                    break;
-            case R.id.radio_fifteen:
-                if (checked)
-                    percent = .15;
-                    break;
-            case R.id.radio_eighteen:
-                if (checked)
-                    percent = .18;
-                    break;
-            case R.id.radio_twenty_five:
-                if (checked)
-                    percent = .25;
-                    break;
+            case R.id.one_button:
+                addTotal(1.00);
+                break;
+            case R.id.two_button:
+                addTotal(2.00);
+                break;
+            case R.id.three_button:
+                addTotal(3.00);
+                break;
+            case R.id.four_button:
+                addTotal(4.00);
+                break;
+            case R.id.five_button:
+                addTotal(5.00);
+                break;
+            case R.id.six_button:
+                addTotal(6.00);
+                break;
+            case R.id.seven_button:
+                addTotal(7.00);
+                break;
+            case R.id.eight_button:
+                addTotal(8.00);
+                break;
+            case R.id.nine_button:
+                addTotal(9.00);
+                break;
+            case R.id.zero_button:
+                addTotal(0.00);
+                break;
+            case R.id.back_button:
+                backTotal();
+                break;
+            case R.id.next_button:
+                startTheActivity();
+                break;
         }
     }
 
-    public void sendMessage(View view) {
-        EditText billTotal = (EditText) findViewById(R.id.bill_total_input);
-        EditText peopleAmount = (EditText) findViewById(R.id.num_people);
-        double realBillTotal= Double.parseDouble(billTotal.getText().toString());
-        double realPeopleAmount = Double.parseDouble(peopleAmount.getText().toString());
-        if(realBillTotal != 0 && realPeopleAmount != 0){
-            double tip = realBillTotal * percent;
-            double total = realBillTotal + tip;
-            double perPerson = total / realPeopleAmount;
-
-            TextView displayTotalCost = (TextView) findViewById(R.id.total_cost);
-            TextView displayperPerson = (TextView) findViewById(R.id.perPersonAmount);
-
-            displayTotalCost.setText("Total Cost:" + total);
-            displayperPerson.setText("Per Person Cost:" + perPerson);
+    private void addTotal(double input)
+    {
+        if (total == 0){
+            total = (input * .01);
         }
-    }
-
-    public void onReset(View view){
-        TextView displayTotalCost = (TextView) findViewById(R.id.total_cost);
-        TextView displayperPerson = (TextView) findViewById(R.id.perPersonAmount);
-        EditText total = (EditText) findViewById(R.id.bill_total_input);
-        EditText people = (EditText)findViewById(R.id.num_people);
-
-        displayTotalCost.setText("Total Cost:");
-        displayperPerson.setText("Per Person Cost:");
-        total.setText("");
-        people.setText("");
+        else
+        {
+            total = (total * 10) + (input * .01);
+        }
+        TextView displayTotalCost = (TextView) findViewById(R.id.total_display_title);
+        DecimalFormat money = new DecimalFormat("$0.00");
+        displayTotalCost.setText("Total:" + money.format(total));
 
     }
 
+    private void backTotal(){
+        total = total *.10;
+        TextView displayTotalCost = (TextView) findViewById(R.id.total_display_title);
+        DecimalFormat money = new DecimalFormat("$0.00");
+        displayTotalCost.setText("Total:"+ money.format(total));
+    }
 
+    public void startTheActivity() {
+        Intent intent = new Intent(this, ActivityGuestsAndPercent.class);
+        //Toast.makeText(this, "Entered:" + message, Toast.LENGTH_LONG).show();
+        intent.putExtra(MY_TOTAL, total);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
 }
 
