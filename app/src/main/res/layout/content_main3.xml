@@ -19,9 +19,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Total:"
             android:id="@+id/total_final"
-            android:layout_column="1" />
+            android:layout_column="0" />
     </TableRow>
 
     <TableRow
@@ -31,9 +32,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Tip:"
             android:id="@+id/tip"
-            android:layout_column="1" />
+            android:layout_column="0" />
     </TableRow>
 
     <TableRow
@@ -43,9 +45,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Number of Guests:"
             android:id="@+id/guests_display"
-            android:layout_column="1" />
+            android:layout_column="0" />
     </TableRow>
 
     <TableRow
@@ -55,27 +58,36 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Amount per person:"
             android:id="@+id/per_person"
-            android:layout_column="1" />
+            android:layout_column="0" />
     </TableRow>
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <TableRow>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style ="@style/PortraitButtonStyle"
             android:text="Round up"
             android:id="@+id/round_up"
-            android:layout_column="1"/>
+            android:layout_column="0"
+            android:layout_width="150dip"
+            android:layout_margin="@dimen/fab_margin"
+            android:background="#4CAF50"
+            android:onClick="roundUpfunc"
+            />
 
+
+    </TableRow>
+    <TableRow>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style ="@style/PortraitButtonStyle"
             android:text="Round Down"
             android:id="@+id/round_down"
-            android:layout_column="10" />
+            android:layout_column="0"
+            android:layout_margin="@dimen/fab_margin"
+            android:background="#E57373"
+            android:onClick="roundDownfunc"
+            />
     </TableRow>
 </TableLayout>

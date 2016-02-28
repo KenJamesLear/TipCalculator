@@ -15,7 +15,7 @@ import org.w3c.dom.Text;
 import java.text.DecimalFormat;
 
 
-public class Main3Activity extends AppCompatActivity implements View.OnClickListener{
+public class Main3Activity extends AppCompatActivity {
 
     private double mMyTotal;
     private double mMyPercent;
@@ -32,8 +32,8 @@ public class Main3Activity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mDisplayTotalCost = (TextView) findViewById(R.id.total_final);
         mDisplayTotalTip = (TextView) findViewById(R.id.tip);
@@ -47,6 +47,7 @@ public class Main3Activity extends AppCompatActivity implements View.OnClickList
         mMyPercent = intent.getDoubleExtra(ActivityGuestsAndPercent.MY_PERCENT, defaultDouble);
         mTip = mMyTotal * mMyPercent;
         realTotal = mTip + mMyTotal;
+
         mDisplayTotalCost.setText("Total:" + money.format(realTotal));
         mDisplayTotalTip.setText("Tip Total:" + money.format(mTip));
         TextView mDisplayTotalGuests =  (TextView) findViewById(R.id.guests_display);
@@ -54,50 +55,63 @@ public class Main3Activity extends AppCompatActivity implements View.OnClickList
         mPerPerson = realTotal/mMyGuests;
         mDisplayPerPerson.setText("Amount Per Person:" + money.format(mPerPerson));
 
-        Button one = (Button) findViewById(R.id.round_up);
-        one.setOnClickListener(this);
-        Button two = (Button) findViewById(R.id.round_down);
-        two.setOnClickListener(this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
-    public void onClick(View v){
-        switch (v.getId()){
-            case R.id.round_up:
-                if ((mPerPerson != 0))
-                {
-                    double temp = Math.round(mPerPerson);
-                    if (temp < mPerPerson)
-                        temp+=1;
-                    mPerPerson = temp;
-                    //mTip= mPerPerson*mMyGuests;
-                    realTotal = mPerPerson * mMyGuests;
-                    mDisplayPerPerson.setText("Amount Per Person:" + money.format(mPerPerson));
-                    mDisplayTotalCost.setText("Total:" + money.format(realTotal));
-                    mDisplayTotalTip.setText("Tip Total:" + money.format(realTotal-mMyTotal));
+        public void roundUpfunc(View view){
+            if ((mPerPerson != 0)) {
+                double temp = Math.round(mPerPerson);
+                if (temp < mPerPerson)
+                    temp += 1;
+                //mPerPerson = temp;
+                //mTip= mPerPerson*mMyGuests;
+                realTotal = temp * mMyGuests;
+                mDisplayPerPerson.setText("Amount Per Person:" + money.format(temp));
+                mDisplayTotalCost.setText("Total:" + money.format(realTotal));
+                mDisplayTotalTip.setText("Tip Total:" + money.format(realTotal - mMyTotal));
                 }
-            case R.id.round_down:
-                if ((mPerPerson != 0))
-                {
-                    double temp = Math.round(mPerPerson);
-                    if (temp > mPerPerson)
-                        temp-=1;
-                    mPerPerson = temp;
-                    //mTip= mPerPerson*mMyGuests;
-                    realTotal = mPerPerson * mMyGuests;
-                    mDisplayPerPerson.setText("Amount Per Person:" + money.format(mPerPerson));
-                    mDisplayTotalCost.setText("Total:" + money.format(realTotal));
-                    mDisplayTotalTip.setText("Tip Total:" + money.format(realTotal-mMyTotal));
-                }
+            }
 
+        public void roundDownfunc(View view){
+            if ((mPerPerson != 0) && mTip > 1)
+            {
+                double temp = Math.round(mPerPerson);
+                if (temp > mPerPerson)
+                    temp-=1;
+
+                //mTip= mPerPerson*mMyGuests;
+                //realTotal = mPerPerson * mMyGuests;
+                realTotal = temp * mMyGuests;
+                mDisplayPerPerson.setText("Amount Per Person:" + money.format(temp));
+                mDisplayTotalCost.setText("Total:" + money.format(realTotal));
+                mDisplayTotalTip.setText("Tip Total:" + money.format(realTotal-mMyTotal));
+            }
         }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putDouble("mMyTotal", mMyTotal);
+        savedInstanceState.putDouble("mMyPercent", mMyPercent);
+        savedInstanceState.putDouble("mMyGuest", mMyGuests);
+        savedInstanceState.putDouble("mMyTotal", mTip);
+        savedInstanceState.putDouble("mPerPerson", mPerPerson);
+        savedInstanceState.putDouble("realTotal", realTotal);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mTip = savedInstanceState.getDouble("mTip",mTip);
+        mPerPerson = savedInstanceState.getDouble("mPerPerson",mPerPerson);
+
+        //realTotal = savedInstanceState.getDouble("realTotal");
+        //mDisplayTotalCost.setText("Total:" + money.format(realTotal));
+       // mDisplayTotalTip.setText("Tip Total:" + money.format(mTip));
+       // TextView mDisplayTotalGuests =  (TextView) findViewById(R.id.guests_display);
+       // mDisplayTotalGuests.setText("Number of Guests:" + (int) mMyGuests);
+       // mPerPerson = realTotal/mMyGuests;
+       // mDisplayPerPerson.setText("Amount Per Person:" + money.format(mPerPerson));
     }
 }

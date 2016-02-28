@@ -5,8 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="lear.scranton.edu.tipcalculator.ActivityGuestsAndPercent">
+    tools:context="lear.scranton.edu.tipcalculator.Main3Activity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +25,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main2" />
-
+    <include layout="@layout/content_main3" />
+</LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

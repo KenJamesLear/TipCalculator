@@ -13,77 +13,95 @@
     tools:showIn="@layout/activity_main">
     <TableRow android:layout_width="match_parent">
         <TextView
-            android:layout_span="3"
+            android:layout_span="10"
             android:text="Total:"
-            android:id="@+id/total_display_title"/>
+            android:id="@+id/total_display_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
     </TableRow>
     <TableRow>
         <Button
-            android:layout_width="wrap_content"
+            style ="@style/PortraitButtonStyle"
             android:text="1"
             android:id="@+id/one_button"
-            android:layout_column="1" />
+            android:layout_column="0" />
+
         <Button
-            android:layout_width="wrap_content"
+            style ="@style/PortraitButtonStyle"
             android:text="2"
             android:id="@+id/two_button"
-            android:layout_column="2"/>
+            android:layout_column="1"
+
+            />
+
         <Button
-            android:layout_width="wrap_content"
+            style ="@style/PortraitButtonStyle"
             android:text="3"
             android:id="@+id/three_button"
-            android:layout_column="3"/>
+            android:layout_column="2"/>
+
     </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </TableRow>
+
     <TableRow>
         <Button
-            android:layout_width="wrap_content"
+            style ="@style/PortraitButtonStyle"
             android:text="4"
             android:id="@+id/four_button"
-            android:layout_column="1" />
+            android:layout_column="0" />
         <Button
-            android:layout_width="wrap_content"
+            style ="@style/PortraitButtonStyle"
             android:text="5"
             android:id="@+id/five_button"
-            android:layout_column="2"/>
+            android:layout_column="1"/>
         <Button
-            android:layout_width="wrap_content"
+            style ="@style/PortraitButtonStyle"
             android:text="6"
             android:id="@+id/six_button"
-            android:layout_column="3"/>
+            android:layout_column="2"/>
     </TableRow>
     <TableRow>
         <Button
-            android:layout_width="wrap_content"
+            style ="@style/PortraitButtonStyle"
             android:text="7"
             android:id="@+id/seven_button"
-            android:layout_column="1" />
+            android:layout_column="0" />
         <Button
-            android:layout_width="wrap_content"
+            style ="@style/PortraitButtonStyle"
             android:text="8"
             android:id="@+id/eight_button"
-            android:layout_column="2"/>
+            android:layout_column="1"/>
         <Button
-            android:layout_width="wrap_content"
+            style ="@style/PortraitButtonStyle"
             android:text="9"
             android:id="@+id/nine_button"
-            android:layout_column="3"/>
+            android:layout_column="2"/>
     </TableRow>
     <TableRow>
         <Button
-            android:layout_width="wrap_content"
-            android:text="back"
+            style ="@style/PortraitButtonStyle"
+            android:text="BACK"
             android:id="@+id/back_button"
-            android:layout_column="1" />
+            android:layout_column="0"
+            android:background="#E57373"/>
+
         <Button
-            android:layout_width="wrap_content"
+            style ="@style/PortraitButtonStyle"
             android:text="0"
             android:id="@+id/zero_button"
-            android:layout_column="2"/>
+            android:layout_column="1"
+            />
+
         <Button
-            android:layout_width="wrap_content"
-            android:text="next"
+            style ="@style/PortraitButtonStyle"
+            android:text="NEXT"
             android:id="@+id/next_button"
-            android:layout_column="3" />
+            android:layout_column="2"
+            android:background="#4CAF50"/>
     </TableRow>
 
 

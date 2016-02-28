@@ -15,14 +15,16 @@
         <TextView
             android:text="Total"
             android:id="@+id/total_display_title_again"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
     </TableRow>
 
     <TableRow>
         <TextView
             android:text="Number of Guests:"
             android:id="@+id/spinner_title"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
     </TableRow>
 
     <TableRow>
@@ -44,6 +46,7 @@
             android:layout_height="wrap_content"
             android:text="Percent:"
             android:id="@+id/percentBarProgress"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_column="0" />
     </TableRow>
 
@@ -58,6 +61,7 @@
                 android:id="@+id/tenPercent"
                 android:text="10%"
                 android:onClick="onRadioButtonClicked"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 />
             <RadioButton
                 android:layout_width="wrap_content"
@@ -66,6 +70,7 @@
                 android:id="@+id/fifteenPercent"
                 android:text="15%"
                 android:onClick="onRadioButtonClicked"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 />
             <RadioButton
                 android:layout_width="wrap_content"
@@ -74,6 +79,7 @@
                 android:id="@+id/eighteenPercent"
                 android:text="18%"
                 android:onClick="onRadioButtonClicked"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 />
             <RadioButton
                 android:layout_width="wrap_content"
@@ -82,6 +88,7 @@
                 android:id="@+id/twentyFivePercent"
                 android:text="25%"
                 android:onClick="onRadioButtonClicked"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 />
         </RadioGroup>
     </TableRow>
@@ -89,25 +96,22 @@
     <TableRow>
         <SeekBar
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dip"
             android:id="@+id/percentBar"
             android:layout_column="0"
             android:max="30"/>
     </TableRow>
 
-
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <TableRow>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/PortraitButtonStyle"
+            android:layout_height="150dip"
             android:text="Calculate"
             android:id="@+id/Calculate"
             android:layout_column="0"
-            android:onClick="startCalc"/>
+            android:onClick="startCalc"
+            />
     </TableRow>
 
 </TableLayout>

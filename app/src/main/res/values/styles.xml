@@ -6,12 +6,25 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/backgroundColor</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="PortraitButtonStyle" parent="android:style/Widget.Button">
+        <item name="android:layout_height">110dip</item>
+        <item name="android:layout_width">110dip</item>
+    </style>
+
+    <style name="LandButtonStyle" parent="android:style/Widget.Button">
+        <item name="android:layout_height">65dip</item>
+        <item name="android:layout_width">200dip</item>
+
+    </style>
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

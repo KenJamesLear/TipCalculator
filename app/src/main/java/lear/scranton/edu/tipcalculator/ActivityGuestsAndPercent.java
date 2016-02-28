@@ -34,7 +34,6 @@ public class ActivityGuestsAndPercent extends AppCompatActivity implements
     private double mMyTotal;
     private double mGuests;
     private double mPercent;
-    private double mPerPerson;
     private SeekBar mBar;
     private TextView  mTextAction;
     public static final String MY_TOTAL = "lear.scranton.edu.tipcalculator.my_total";
@@ -56,7 +55,6 @@ public class ActivityGuestsAndPercent extends AppCompatActivity implements
         DecimalFormat money = new DecimalFormat("$0.00");
         displayTotalCost.setText(
                 "Total:" + money.format(mMyTotal));
-
         mGuests = 1;
         mPercent = 0;
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -125,14 +123,14 @@ public class ActivityGuestsAndPercent extends AppCompatActivity implements
 
     public void onProgressChanged(SeekBar seekBar, int progress,
                                   boolean fromUser) {
-        mTextAction.setText("Percent:" + mPercent +"%");
+        mTextAction.setText("Percent:" + mPercent*100 +"%");
     }
 
     public void onStopTrackingTouch(SeekBar seekBar) {
         seekBar.setSecondaryProgress(seekBar.getProgress());
         int progress = seekBar.getProgress();
         mPercent = (double)progress/100;
-        mTextAction.setText("Percent:" + mPercent +"%");
+        mTextAction.setText("Percent:" + mPercent*100 +"%");
         Toast.makeText(this, "You Selected " + mPercent, Toast.LENGTH_SHORT).show();
     }
 
@@ -145,12 +143,36 @@ public class ActivityGuestsAndPercent extends AppCompatActivity implements
         //Toast.makeText(this, "Entered:" + message, Toast.LENGTH_LONG).show();
         intent.putExtra(MY_TOTAL, mMyTotal);
         intent.putExtra(MY_GUESTS,mGuests);
-        intent.putExtra(MY_PERCENT,mPercent);
+        intent.putExtra(MY_PERCENT, mPercent);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        // Save UI state changes to the savedInstanceState.
+        // This bundle will be passed to onCreate if the process is
+        // killed and restarted.
+        savedInstanceState.putDouble("MyTotal", mMyTotal);
+        savedInstanceState.putDouble("myGuests",mGuests);
+        savedInstanceState.putDouble("myPercent",mPercent);
+        // etc.
+    }
 
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // Restore UI state from the savedInstanceState.
+        // This bundle has also been passed to onCreate.
+        mMyTotal = savedInstanceState.getDouble("MyTotal");
+        mGuests = savedInstanceState.getDouble("myGuests");
+        mPercent = savedInstanceState.getDouble("myPercent");
+        mTextAction.setText("Percent:" + mPercent*100 +"%");
 
+        DecimalFormat money = new DecimalFormat("$0.00");
+        TextView displayTotalCost = (TextView) findViewById(R.id.total_display_title_again);
+        displayTotalCost.setText("Total:" + money.format(mMyTotal));
+    }
 
 
 }

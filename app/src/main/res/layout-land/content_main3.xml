@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Total:"
+        android:id="@+id/total_final" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Tip:"
+        android:id="@+id/tip" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Number of Guests:"
+        android:id="@+id/guests_display" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Per Person:"
+        android:id="@+id/per_person" />
+
+    <Button
+        style ="@style/LandButtonStyle"
+        android:layout_height="75dip"
+        android:layout_width="match_parent"
+        android:text="Round up"
+        android:id="@+id/round_up"
+        android:background="#4CAF50"
+        android:onClick="roundUpfunc"/>
+
+    <Button
+        style ="@style/LandButtonStyle"
+        android:layout_height="75dip"
+        android:layout_width="match_parent"
+        android:text="Round down"
+        android:id="@+id/round_down"
+        android:background="#E57373"
+        android:onClick="roundDownfunc"/>
+</LinearLayout>

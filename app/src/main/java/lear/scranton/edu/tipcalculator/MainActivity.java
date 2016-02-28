@@ -71,14 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         total = 0;
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
 
     @Override
@@ -163,6 +156,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void backTotal(){
         total = total *.10;
+        if (total < .01)
+            total = 0.00;
         TextView displayTotalCost = (TextView) findViewById(R.id.total_display_title);
         DecimalFormat money = new DecimalFormat("$0.00");
         displayTotalCost.setText("Total:"+ money.format(total));
@@ -173,6 +168,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Toast.makeText(this, "Entered:" + message, Toast.LENGTH_LONG).show();
         intent.putExtra(MY_TOTAL, total);
         startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        // Save UI state changes to the savedInstanceState.
+        // This bundle will be passed to onCreate if the process is
+        // killed and restarted.
+        savedInstanceState.putDouble("MyTotal", total);
+        // etc.
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // Restore UI state from the savedInstanceState.
+        // This bundle has also been passed to onCreate.
+        total = savedInstanceState.getDouble("MyTotal");
+        TextView displayTotalCost = (TextView) findViewById(R.id.total_display_title);
+        DecimalFormat money = new DecimalFormat("$0.00");
+        displayTotalCost.setText("Total:"+ money.format(total));
     }
 }
 
